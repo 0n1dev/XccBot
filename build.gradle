@@ -2,11 +2,17 @@ plugins {
     id 'org.springframework.boot' version '2.5.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'org.ec4j.editorconfig' version '0.0.3'
+    id 'checkstyle'
 }
 
 group = 'kr.xcc'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+// 인코딩 지정 (UTF-8)
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
 configurations {
     // 전체 그룹의 의존성 배제 log4j2와 충돌방지 spring-boot-starter-logging 제외
@@ -41,4 +47,24 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+editorconfig {
+    excludes = ['build']
+}
+
+check.dependsOn editorconfigCheck
+
+checkstyle {
+    toolVersion = '8.42'
+    maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail을 내고 싶다면 이 선언을 추가한다.
+    configFile = file("${rootDir}/config/checkstyle/naver-checkstyle-rules.xml") // 작성한 checkstyle.xml 적용 (네이버)
+    configProperties = ["suppressionFile" : "${rootDir}/config/checkstyle/naver-checkstyle-suppressions.xml"]
+    reportsDir = file("${buildDir}/checkstyle-results") // report 파일 위치 지정
+}
+
+checkstyleMain {
+    reports {
+        xml.destination = file("${checkstyle.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
+    }
 }
