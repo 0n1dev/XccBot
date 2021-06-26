@@ -16,9 +16,9 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
+        stage('Convension') {
             steps {
-                echo 'Careers Test'
+                echo 'Conversion Check'
 
                 sh 'chmod +x gradlew'      // 모든 사용자에게 gradlew 권한 추가
                 sh './gradlew clean checkstyleMain' // gradlew 의 celan checkstyleTest 를 실행 
@@ -27,7 +27,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Careers Build'
+                echo 'Gradle Build'
 
                 sh './gradlew build -x test' // gradlew build 
             }
