@@ -6,7 +6,8 @@ pipeline {
         discordImage = 'https://www.rundeck.com/hubfs/jenkinsrundeck.png'
         discordDesc = "notes: Hey, the build is done!"
         discordFooter = "footer desc with vars: ${env.JOB_BASE_NAME}` (build #${BUILD_NUMBER})"
-        discordTitle = "${env.JOB_BASE_NAME}"	
+        discordTitle = "${env.JOB_BASE_NAME}",
+	discordFaildDesc = "notes : Hey, the build is faild!"
     }
     stages {
         stage('Git Checkout') {
@@ -71,7 +72,7 @@ pipeline {
         }
         failure {
 		discordSend(
-			description: discordDesc,
+			description: discordFaildDesc,
 			title: discordTitle,
 			footer: discordFooter,
 			link: env.BUILD_URL,
