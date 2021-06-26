@@ -79,6 +79,6 @@ pipeline {
 			result: currentBuild.currentResult,
 			webhookURL: envDiscordUrl
 		)
-            }
         }
+    }
 }
