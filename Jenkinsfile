@@ -36,7 +36,7 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: "build/libs/*", //전송할 파일
                                     removePrefix: "build/libs", //파일에서 삭제할 경로가 있다면 작성
-                                    remoteDirectory: "buildfile" //배포할 위치
+                                    remoteDirectory: "buildfile", //배포할 위치
                                     execCommand: "ls -al /sorc001/temp/" //원격지에서 실행할 커맨드
   )
                             ]
