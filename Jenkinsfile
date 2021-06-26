@@ -1,5 +1,13 @@
 pipeline {
     agent any
+    environment {
+	discordURL = 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1'
+        // URL of image png/jpg to place to right of Discord build notifications
+        discordImage = 'https://blabla.png'
+        discordDesc = "description\n"
+        discordFooter = "footer desc with vars: ${env.JOB_BASE_NAME}` (build #${BUILD_NUMBER})"
+        discordTitle = "${buildName} (devel)"	
+    }
     stages {
         stage('Git Checkout') {
             steps {
@@ -48,12 +56,6 @@ pipeline {
     }
 
     post {
-        def discordURL = 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1'
-        // URL of image png/jpg to place to right of Discord build notifications
-        def discordImage = 'https://blabla.png'
-        def discordDesc = "description\n"
-        def discordFooter = "footer desc with vars: ${env.JOB_BASE_NAME}` (build #${BUILD_NUMBER})"
-        def discordTitle = "${buildName} (devel)"
         success {
 		discordSend(
 			description: discordImage,
@@ -74,6 +76,7 @@ pipeline {
 			title: discordTitle,
 			webhookURL: 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1', 
 		)
+            }
         }
     }
 }
