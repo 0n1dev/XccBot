@@ -4,7 +4,7 @@ pipeline {
 	discordURL = 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1'
         // URL of image png/jpg to place to right of Discord build notifications
         discordImage = 'https://www.rundeck.com/hubfs/jenkinsrundeck.png'
-        discordDesc = "notes: "Hey, the build is done!""
+        discordDesc = "notes: Hey, the build is done!"
         discordFooter = "footer desc with vars: ${env.JOB_BASE_NAME}` (build #${BUILD_NUMBER})"
         discordTitle = "${env.JOB_BASE_NAME}"	
     }
