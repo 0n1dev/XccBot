@@ -66,7 +66,7 @@ pipeline {
 			footer: discordFooter,
 			link: env.BUILD_URL,
 			result: currentBuild.currentResult,
-			webhookURL: envDiscordUrl,
+			webhookURL: discordURL,
 			successful: currentBuild.resultIsBetterOrEqualTo('SUCCESS'),
 		)
             
@@ -78,7 +78,7 @@ pipeline {
 			footer: discordFooter,
 			link: env.BUILD_URL,
 			result: currentBuild.currentResult,
-			webhookURL: envDiscordUrl
+			webhookURL: discordURL
 		)
             }
         }
