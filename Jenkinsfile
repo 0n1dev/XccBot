@@ -45,7 +45,7 @@ pipeline {
                                     sourceFiles: "build/libs/*", //전송할 파일
                                     removePrefix: "build/libs", //파일에서 삭제할 경로가 있다면 작성
                                     remoteDirectory: "buildfile", //배포할 위치
-                                    execCommand: "ls -al" //원격지에서 실행할 커맨드
+                                    execCommand: "nohub sh /home/test3/restart.sh &" //원격지에서 실행할 커맨드
   			)
                             ]
                         )
