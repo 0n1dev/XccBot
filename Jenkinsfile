@@ -56,25 +56,23 @@ pipeline {
         def discordTitle = "${buildName} (devel)"
         success {
 		discordSend(
-			description: "Jenkins Pipeline Build", 
+			description: discordImage,
 			footer: discordFooter,
 			link: env.BUILD_URL,
 			result: currentBuild.currentResult,
 			title: discordTitle,
 			webhookURL: 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1', 
-			description: discordImage,
 		)
             
         }
         failure {
 		discordSend(
-			description: "Jenkins Pipeline Build", 
-			footer: "Footer Text",
+			description: discordImage,
+			footer: discordFooter,
 			link: env.BUILD_URL,
 			result: currentBuild.currentResult,
-			title: JOB_NAME,
+			title: discordTitle,
 			webhookURL: 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1', 
-			description: 'Discord Notifier',
 		)
         }
     }
