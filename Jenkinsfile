@@ -36,9 +36,9 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: "build/libs/*", //전송할 파일
                                     removePrefix: "build/libs", //파일에서 삭제할 경로가 있다면 작성
-                                    remoteDirectory: "buildfile", //배포할 위치
-                                    execCommand: "ls -al" //원격지에서 실행할 커맨드
-  )
+                                    remoteDirectory: "buildfile" //배포할 위치
+                                    execCommand: "nohub sh /home/test3/restart.sh &" //원격지에서 실행할 커맨드
+  			)
                             ]
                         )
                     ]
@@ -46,10 +46,37 @@ pipeline {
             }
 
     }
-    stage('Discord Notifier') {
-          steps {
-                discordSend(webhookURL: 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1', description: 'Discord Notifier')
-          }
+
+    post {
+        def discordURL = 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1'
+        // URL of image png/jpg to place to right of Discord build notifications
+        def discordImage = 'https://blabla.png'
+        def discordDesc = "description\n"
+        def discordFooter = "footer desc with vars: ${env.JOB_BASE_NAME}` (build #${BUILD_NUMBER})"
+        def discordTitle = "${buildName} (devel)"
+        success {
+		discordSend(
+			description: "Jenkins Pipeline Build", 
+			footer: discordFooter,
+			link: env.BUILD_URL,
+			result: currentBuild.currentResult,
+			title: discordTitle,
+			webhookURL: 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1', 
+			description: discordImage,
+		)
+            
         }
-  }
+        failure {
+		discordSend(
+			description: "Jenkins Pipeline Build", 
+			footer: "Footer Text",
+			link: env.BUILD_URL,
+			result: currentBuild.currentResult,
+			title: JOB_NAME,
+			webhookURL: 'https://discord.com/api/webhooks/855816593162633246/ZN3LvWBP7tEy18zUOw55Zdpup3MtcPKik4RG3chSwEXVN0w62XS1O9__nhnsx5r08bM1', 
+			description: 'Discord Notifier',
+		)
+        }
+    }
+
 }
