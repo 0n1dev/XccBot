@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class XccBotApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(XccBotApplication.class, args);
+	SpringApplication.run(XccBotApplication.class, args);
 	}
 
 }
