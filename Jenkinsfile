@@ -124,9 +124,10 @@ def getTestSummary() {
 @NonCPS
 def getFailedTests() {
     def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
-    def failedTestsString = "```"
+    def failedTestsString = ""
 
     if (testResultAction != null) {
+        failedTestsString = "```"
         def failedTests = testResultAction.getFailedTests()
 
         if (failedTests.size() > 9) {
