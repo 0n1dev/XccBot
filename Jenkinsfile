@@ -88,7 +88,7 @@ pipeline {
         }
         failure {
             discordSend(
-                    description: "**Status**: ${currentBuild.currentResult}\n**Build**: ${currentBuild.number}\n\n**Last Commit**: ${gitAuthor} - ${gitMessage}\n\n***Test**:\\n${getTestSummary()}\\n\\n**Changes**:\\n${getChangeString()}\n\n${getFailedTests()}",
+                    description: "**Status**: ${currentBuild.currentResult}\n**Build**: ${currentBuild.number}\n\n**Last Commit**: ${gitAuthor} - ${gitMessage}\n\n***Test**:\n${getTestSummary()}\n\n**Changes**:\n${getChangeString()}\n\n${getFailedTests()}",
                     title: discordTitle,
                     footer: discordFooter,
                     link: env.BUILD_URL,
