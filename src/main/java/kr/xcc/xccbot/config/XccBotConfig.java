@@ -20,7 +20,7 @@ public class XccBotConfig {
 	JDA jda(@Value("${jda.token}") final String jdaToken) {
 		final JDABuilder builder = JDABuilder.createDefault(jdaToken);
 
-		builder.setActivity(Activity.watching("KorPUBG vBeta"));
+		builder.setActivity(Activity.watching("XccBot vBeta"));
 		builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
 		builder.setMemberCachePolicy(MemberCachePolicy.ALL);
 		builder.setChunkingFilter(ChunkingFilter.NONE);
