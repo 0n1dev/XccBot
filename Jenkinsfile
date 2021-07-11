@@ -4,6 +4,7 @@ pipeline {
         gitAuthor = ""
         gitMessage = ""
         envDiscordUrl = "${env.DISCORD_URL}"
+        envDiscordToken = "${env.DISCORD_TOKEN}"
         // URL of image png/jpg to place to right of Discord build notifications
         discordImage = 'https://www.rundeck.com/hubfs/jenkinsrundeck.png'
         discordDesc = "notes: Hey, the build is done!"
@@ -37,7 +38,7 @@ pipeline {
                 echo 'Test'
 
                 sh 'chmod +x gradlew'      // 모든 사용자에게 gradlew 권한 추가
-                sh './gradlew clean test' // gradlew 의 Test 를 실행
+                sh './gradlew clean test -Djda.token=${envDiscordToken}' // gradlew 의 Test 를 실행
 
                 step $class: 'JUnitResultArchiver', testResults: '**/TEST-*.xml'
             }
