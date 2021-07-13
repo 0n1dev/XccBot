@@ -40,6 +40,9 @@ dependencies {
     // log4j2
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 
+    // 리플렉션 라이브러리
+    implementation 'org.reflections:reflections:0.9.10'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -68,3 +71,4 @@ checkstyleMain {
         xml.destination = file("${checkstyle.reportsDir}/checkstyle-report.xml") // 리포트 파일의 위치 및 파일명 지정
     }
 }
+

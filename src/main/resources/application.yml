@@ -1,2 +1,4 @@
 jda:
+  discord:
+    token : ODYyMDExNDg1MDIxNDA1MTg2.YOSIwQ.jwqYrqKNiIcZVrBbB7Qakc0mfSM
   token: ${DISCORD_TOKEN}
